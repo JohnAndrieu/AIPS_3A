@@ -109,7 +109,7 @@ int main (int argc, char **argv)
 
 		//envoie du message
 		int result;
-		result = sendto(addr_intern,message,lg,0,(struct sockaddr*)padr_dest,lg_adr_dest);
+		result = sendto(addr_intern,message,lg,0,(struct sockaddr*)&padr_dest,lg_adr_dest);
 
 		if(result == -1){
 			printf("Echec de l'envoi du message\n");
