@@ -1,3 +1,4 @@
+
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -111,7 +112,7 @@ int main (int argc, char **argv)
 		result = sendto(addr_intern,message,lg,0,(struct sockaddr*)padr_dest,lg_adr_dest);
 
 		if(result == -1){
-			printf("Echec de l'envoi du message");
+			printf("Echec de l'envoi du message\n");
 		}
 
 	}
@@ -151,7 +152,8 @@ int main (int argc, char **argv)
 		int lgmax = 100;
 		int option = 0;
 		int lg_addr_distant = sizeof(adr_distant);
-		nb_octetslus = recvfrom(sock,msg,lgmax,option,(struct sockaddr *)&adr_distant,&lg_addr_distant);
+        int nb_octetslus;
+		nb_octetslus = recvfrom(sock,msg,lgmax,option,(struct sockaddr *)&adr_distant,(socklen_t*)&lg_addr_distant);
 		if(nb_octetslus == -1){
 			printf("erreur reception message\n");
 			exit(1);
@@ -176,44 +178,3 @@ int main (int argc, char **argv)
     return 0;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
