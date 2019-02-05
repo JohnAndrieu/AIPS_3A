@@ -147,7 +147,15 @@ int main (int argc, char **argv)
 		}
 
 		/*reception des messages*/
-		
+		char msg[100];
+		int lgmax = 100;
+		int option = 0;
+		int lg_addr_distant = sizeof(adr_distant);
+		nb_octetslus = recvfrom(sock,msg,lgmax,option,(struct sockaddr *)&adr_distant,&lg_addr_distant);
+		if(nb_octetslus == -1){
+			printf("erreur reception message\n");
+			exit(1);
+		}
 
 	}
 
