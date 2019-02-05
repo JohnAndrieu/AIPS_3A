@@ -119,7 +119,7 @@ int main (int argc, char **argv)
 
 		printf("on est dans le puits\n");
 
-		/*affectation domaine, n°port et adresse ip*/
+		/*construction de l'adresse du socket*/
 
 		memset((char *)&adr_local,0,sizeof(adr_local)); //reset struct
 
@@ -133,7 +133,7 @@ int main (int argc, char **argv)
 		int sock;
 		int lg_adr_local = sizeof(adr_local);
 
-		/*creation du socket*/
+		/*creation du socket local*/
 
 		if((sock = socket(AF_INET,SOCK_DGRAM,0)) == -1){
 			printf("echec de la creation du socket\n");
@@ -168,4 +168,44 @@ int main (int argc, char **argv)
     return 0;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
