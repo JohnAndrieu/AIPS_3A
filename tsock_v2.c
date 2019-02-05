@@ -112,7 +112,7 @@ int main (int argc, char **argv)
 		if (connexion == 0 ){			
 			//envoie du message
 			int result;
-			result = sendto(addr_intern,message,lg,0,(struct sockaddr*)padr_dest,lg_adr_dest);
+			result = write(addr_intern,message,lg);
 
 			if(result == -1){
 				printf("Echec de l'envoi du message");
