@@ -154,6 +154,8 @@ int main (int argc, char **argv)
 		int lg_addr_distant = sizeof(adr_distant);
         int nb_octetslus;
 		nb_octetslus = recvfrom(sock,msg,lgmax,option,(struct sockaddr *)&adr_distant,(socklen_t*)&lg_addr_distant);
+		printf("nb octets lus : %d",nb_octetslus);
+		printf("message : %s",msg);
 		if(nb_octetslus == -1){
 			printf("erreur reception message\n");
 			exit(1);
@@ -171,7 +173,7 @@ int main (int argc, char **argv)
 			nb_message = 10 ;
 			printf("nb de tampons à envoyer = 10 par défaut\n");
 		} else
-		printf("nb de tampons à envoyer = infini\n");
+		printf("nb de tampons à recevoir = infini\n");
 
 	}
 
