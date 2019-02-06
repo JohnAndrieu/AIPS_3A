@@ -30,8 +30,8 @@ void afficher_message(char *message, int lg)
     printf("message construit : ");
 
     for (i=0;i<lg;i++){
-        printf("%c", message[i]); printf("\n");
-    }
+        printf("%c", message[i]); 
+    }printf("\n");
 
 }
 
@@ -42,8 +42,8 @@ int main (int argc, char **argv)
 	extern int optind;
 	int nb_message = -1; /* Nb de messages à envoyer ou à recevoir, par défaut : 10 en émission, infini en réception */
 	int source = -1 ; /* 0=puits, 1=source */
-    int lg = -1;
-	while ((c = getopt(argc, argv, "psnl:")) != -1) {
+    int lg;
+	while ((c = getopt(argc, argv, "psn:l:")) != -1) {
 		switch (c) {
 		case 'p':
 			if (source == 1) {
@@ -104,36 +104,43 @@ int main (int argc, char **argv)
 		}
 		memcpy((char*)&(adr_distant.sin_addr.s_addr),hp->h_addr,hp->h_length);
 
-		struct sockaddr_in * padr_dest;
-		padr_dest = &(adr_distant);
 
 		int lg_adr_dest = sizeof(adr_distant);
 
 		char * message;
 		message = malloc(lg*sizeof(char));
-		construire_message(message,'j',lg);
+		construire_message(message,'j',lg);	
 
 
 		//phase de connexion:
 		int connexion;
-		connexion=connect(addr_intern,(struct sockaddr*)padr_dest,lg_adr_dest);
+		connexion=connect(addr_intern,(struct sockaddr*)&adr_distant,lg_adr_dest);
 		if (connexion == 0 ){			
 			//envoie du message
 			int result;
 			while(nb_message != 0){
+							
 				result = write(addr_intern,message,lg);
-
+				afficher_message(message,lg);
 				if(result == -1){
-					printf("Echec de l'envoi du message");
+					printf("Echec de l'envoi du message\n");
 				}
 				nb_message--;
 			}
+			printf("fini emission\n");
 		}
 		else{
-			printf("connexion échouée");
+			printf("connexion échouée\n");
 		}
+		int fermeture;
+		fermeture=shutdown(addr_intern,2);
+		if(fermeture==-1){
+		printf("erreur fermeture\n");
 
-	}
+		}
+		else
+			printf("fermeture reussi\n");
+		}
 	else
 		printf("on est dans le puits\n");
 	
