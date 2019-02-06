@@ -132,8 +132,8 @@ int main (int argc, char **argv)
 		int max = 10;
 		int lg_max = 30;
 		
-		sock = socket(AF_INET,SOCK_STREAM,0);
-		
+		sock = socket(AF_INET,SOCK_STREAM,0); //création socket local
+		//construction de l'adresse de ce socket
 		bind();
 		listen(sock,5);
 	
