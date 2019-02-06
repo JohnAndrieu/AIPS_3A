@@ -125,6 +125,7 @@ int main (int argc, char **argv)
 	}
 	else
 		printf("on est dans le puits\n");
+	
 		int sock, sock_bis;
 		struct sockaddr_in adr_client;
 		int lg_adr_client = sizeof(adr_client);
@@ -133,8 +134,12 @@ int main (int argc, char **argv)
 		int lg_max = 30;
 		
 		sock = socket(AF_INET,SOCK_STREAM,0); //création socket local
+	
 		//construction de l'adresse de ce socket
-		bind();
+		if(bind(sock,(struct sockaddr *)&adr_local,lg_adr_local) == -1){ //pas finit
+			printf("echec du bind\n");
+			exit(1);
+		}
 		listen(sock,5);
 	
 		if((sock_bis = accept(sock,(struct sockaddr*)&adr_client,&lg_adr_client)) == -1){
