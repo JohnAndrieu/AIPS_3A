@@ -43,7 +43,7 @@ int main (int argc, char **argv)
 	int nb_message = -1; /* Nb de messages à envoyer ou à recevoir, par défaut : 10 en émission, infini en réception */
 	int source = -1 ; /* 0=puits, 1=source */
     int lg = -1;
-	while ((c = getopt(argc, argv, "psn:")) != -1) {
+	while ((c = getopt(argc, argv, "psnl:")) != -1) {
 		switch (c) {
 		case 'p':
 			if (source == 1) {
@@ -120,10 +120,13 @@ int main (int argc, char **argv)
 		if (connexion == 0 ){			
 			//envoie du message
 			int result;
-			result = write(addr_intern,message,lg);
+			while(nb_message != 0){
+				result = write(addr_intern,message,lg);
 
-			if(result == -1){
-				printf("Echec de l'envoi du message");
+				if(result == -1){
+					printf("Echec de l'envoi du message");
+				}
+				nb_message--;
 			}
 		}
 		else{
@@ -191,7 +194,7 @@ int main (int argc, char **argv)
 			nb_message = 10 ;
 			printf("nb de tampons à envoyer = 10 par défaut\n");
 		} else
-		printf("nb de tampons à envoyer = infini\n");
+		printf("nb de tampons à recevoir = infini\n");
 
 	}
 
