@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <getopt.h>
+#include <string.h>
 
 struct hostent *hp;
 struct sockaddr_in adr_distant;
@@ -127,6 +128,8 @@ int main (int argc, char **argv)
 	else
 		printf("on est dans le puits\n");
 	
+		int i;
+
 		memset((char *)&adr_local,0,sizeof(adr_local)); //reset struct adresse locale
 		
 		int sock, sock_bis;
@@ -137,6 +140,7 @@ int main (int argc, char **argv)
 		int lg_rec;
 		int max = 10;
 		int lg_max = 30;
+		char message[100];
 		
 		sock = socket(AF_INET,SOCK_STREAM,0); //création socket local
 	
@@ -148,6 +152,7 @@ int main (int argc, char **argv)
 		port = htons(port);
 		adr_local.sin_port = port;
 		adr_local.sin_addr.s_addr = INADDR_ANY;
+		int lg_adr_local = sizeof(adr_local);
 	
 		if(bind(sock,(struct sockaddr *)&adr_local,lg_adr_local) == -1){
 			printf("echec du bind\n");
@@ -156,7 +161,7 @@ int main (int argc, char **argv)
 	
 		listen(sock,5);
 	
-		if((sock_bis = accept(sock,(struct sockaddr*)&adr_client,&lg_adr_client)) == -1){
+		if((sock_bis = accept(sock,(struct sockaddr*)&adr_client,(socklen_t*)&lg_adr_client)) == -1){
 			printf("echec du accept\n");
 			exit(1);
 		}
