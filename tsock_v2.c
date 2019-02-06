@@ -125,7 +125,29 @@ int main (int argc, char **argv)
 	}
 	else
 		printf("on est dans le puits\n");
-
+		int sock, sock_bis;
+		struct sockaddr_in adr_client;
+		int lg_adr_client = sizeof(adr_client);
+		int lg_rec;
+		int max = 10;
+		int lg_max = 30;
+		
+		sock = socket(AF_INET,SOCK_STREAM,0);
+		
+		bind();
+		listen(sock,5);
+	
+		if((sock_bis = accept(sock,(struct sockaddr*)&adr_client,&lg_adr_client)) == -1){
+			printf("echec du accept\n");
+			exit(1);
+		}
+		for(i=0;i<max;i++){
+			if((lg_rec = read(sock_bis, message, lg_max)) < 0){
+				printf("echec du read\n");
+				exit(1);
+			}
+			afficher_message(message,lg_rec);
+		}
 
 
 
