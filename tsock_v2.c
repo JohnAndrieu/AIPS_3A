@@ -9,6 +9,7 @@
 
 struct hostent *hp;
 struct sockaddr_in adr_distant;
+struct sockaddr_in adr_local;
 
 void construire_message(char *message, char motif, int lg) //construction du message
 {
