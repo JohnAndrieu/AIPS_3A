@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <getopt.h>
 #include <string.h>
+#include <unistd.h>
+
 
 struct hostent *hp;
 struct sockaddr_in adr_distant;
