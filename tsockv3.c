@@ -141,7 +141,7 @@ int main (int argc, char **argv)
 		else
 			printf("fermeture reussi\n");
 		}
-	else
+	else{
 		printf("on est dans le puits\n");
 	
 		int i;
@@ -154,10 +154,11 @@ int main (int argc, char **argv)
 		int lg_adr_client = sizeof(adr_client);
 	
 		int lg_rec;
-		int max = 10;
-		int lg_max = 30;
-		char message[100];
-		
+		//int max = 10;
+		//int lg_max = 30;
+
+        char * message;
+		message = malloc(lg*sizeof(char));
 		sock = socket(AF_INET,SOCK_STREAM,0); //création socket local
 	
 		//construction de l'adresse de ce socket
@@ -182,7 +183,7 @@ int main (int argc, char **argv)
 			exit(1);
 		}
 		for(i=0;i<nb_message;i++){
-			if((lg_rec = read(sock_bis, message, lg_max)) < 0){
+			if((lg_rec = read(sock_bis, message, lg)) < 0){
 				printf("echec du read\n");
 				exit(1);
 			}
@@ -190,7 +191,7 @@ int main (int argc, char **argv)
 		}
 
 
-
+    }
 	if (nb_message != -1) {
 		if (source == 1)
 			printf("nb de tampons à envoyer : %d\n", nb_message);
