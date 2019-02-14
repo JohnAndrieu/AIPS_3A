@@ -181,12 +181,12 @@ int main (int argc, char **argv)
 			printf("echec du accept\n");
 			exit(1);
 		}
-		for(i=0;i<max;i++){
+		for(i=0;i<nb_message;i++){
 			if((lg_rec = read(sock_bis, message, lg_max)) < 0){
 				printf("echec du read\n");
 				exit(1);
 			}
-			afficher_message(message,lg_rec);
+			afficher_message(message,lg);
 		}
 
 
